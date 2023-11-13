@@ -36,7 +36,7 @@ func ScanProcess(pid int, rule string, src_path string) {
 	Npattern := []string{"ms-msdt:/id\\s+PCWDiagnostic\\s+/skip force\\s+/param"}
 
 	if err == nil {
-		err, scanResults := scannerEngine.ScanProcesses(pid, ipList, Npattern)
+		scanResults, err := scannerEngine.ScanProcesses(pid, ipList, Npattern)
 		if err == nil {
 			models.SaveProcessResult(scanResults)
 		} else {

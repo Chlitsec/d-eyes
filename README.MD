@@ -21,7 +21,7 @@ D-Eyes为绿盟科技一款检测与响应工具，可在如下方面开展支�
 3. 指定线程扫描(-t 参数)  
 命令：`D-Eyes fs -P C:\Windows\TEMP,D:\tmp -t 3`
 4. 指定单一规则扫描(-r 参数)  
-命令：`D-Eyes fs -P D:\tmp -t 3 -r Ransom.Wannacrypt`
+   命令：`D-Eyes fs -P D:\tmp -t 3 -r Ransom.Wannacrypt`
    > 规则名称即将yaraRules目录下的规则去掉后缀`.yar`, 如：指定`Ransom.Wannacrypt.yar`规则，即`-r Ransom.Wannacrypt`。
 #### Linux
 1. 默认扫描(默认以5个线程扫描全盘)  
@@ -32,7 +32,7 @@ D-Eyes为绿盟科技一款检测与响应工具，可在如下方面开展支�
 3.  指定线程扫描(-t 参数)  
 命令：`./D-Eyes fs -P /tmp,/var -t 3`
 4.  指定单一规则扫描(-r 参数)  
-命令：`./D-Eyes fs -P /tmp -t 3 -r Ransom.Wannacrypt`
+    命令：`./D-Eyes fs -P /tmp -t 3 -r Ransom.Wannacrypt`
     > 规则名称即将yaraRules目录下的规则去掉后缀`.yar`, 如：指定`Ransom.Wannacrypt.yar`规则，即`-r Ransom.Wannacrypt`。
 
 
@@ -47,8 +47,8 @@ D-Eyes为绿盟科技一款检测与响应工具，可在如下方面开展支�
 3. 指定规则扫描(-r参数)  
 命令：`D-Eyes ps -p 1234 -r Ransom.Wannacrypt`
 4. 检测指定外联IP的进程  
-可将恶意ip添加到工具目录`ip.config`文件当中，执行`D-Eyes ps`程序会自动检测是否有进程连接该IP，最后结果会输出到终端。  
-`ip.config`文件格式(换行添加即可)，如：
+   可将恶意ip添加到工具目录`ip.config`文件当中，执行`D-Eyes ps`程序会自动检测是否有进程连接该IP，最后结果会输出到终端。  
+   `ip.config`文件格式(换行添加即可)，如：
     ```
     0.0.0.0
     127.0.0.1
@@ -62,8 +62,8 @@ D-Eyes为绿盟科技一款检测与响应工具，可在如下方面开展支�
 3. 指定规则扫描(-r参数)  
 命令：`./D-Eyes ps -p 1234 -r Ransom.Wannacrypt`
 4. 检测指定外联IP的进程  
-可将恶意ip添加到工具目录`ip.config`文件当中，执行`D-Eyes ps`程序会自动检测是否有进程连接该IP，最后结果会输出到终端。  
-`ip.config`文件格式(换行添加即可)，如：
+   可将恶意ip添加到工具目录`ip.config`文件当中，执行`D-Eyes ps`程序会自动检测是否有进程连接该IP，最后结果会输出到终端。  
+   `ip.config`文件格式(换行添加即可)，如：
     ```
     0.0.0.0
     127.0.0.1
@@ -99,6 +99,24 @@ Linux命令：   `./D-Eyes sc`
 > 目前Linux自检功能支持以下模块检测：
 空密码账户检测、SSH Server wrapper检测、SSH用户免密证书登录检测、主机 Sudoer检测、alias检测、Setuid检测、SSH登录爆破检测、主机Rootkit检测、主机历史命令检测、主机最近成功登录信息显示、主机计划任务内容检测、环境变量检测、系统启动服务检测、TCP Wrappers 检测、inetd配置文件检测、xinetd配置文件检测、预加载配置文件检测。
 ---
+### Windows事件日志提取
+1. 默认提取system类型、忽略当前时间一小时之前的Windows事件日志
+
+   命令：`D-Eyes logs`
+
+2. 指定Windows事件类型（-lp参数，有system,application,security三个选项）
+
+   命令：`D-Eyes logs -lp security`
+
+3. 指定忽略当前时间之前的日志信息（-i参数，有1h,12h,24h,week,month五个选项）
+
+   命令：`D-Eyes logs -i 24h`
+
+4. 指定获取多少条事件日志信息（-s参数，默认200）
+
+   命令：`D-Eyes logs -s 100` 
+
+
 ## ⚠️注意事项
 在D-Eyes工具目录下子目录yaraRules中，部分规则会触发杀毒软件告警，因为该目录存放的规则文件与杀软查杀规则相符，会触发杀软告警，直接加白即可，不会存在实际危害。
 

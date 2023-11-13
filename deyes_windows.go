@@ -1,6 +1,7 @@
 package main
 
 import (
+	"d-eyes/basicinfo/windows_log"
 	"fmt"
 	"log"
 	"os"
@@ -24,6 +25,9 @@ var rule string
 var thread int
 var pid int
 var vulnerability int
+var logType string
+var size int
+var ignore string
 
 func main() {
 	srcPath := SrcPath()
@@ -278,7 +282,37 @@ func main() {
 					return nil
 				},
 			},
-
+			{
+				Name: "logs",
+				Usage: "Command for logs of Application, System and Security Information",
+				Flags: []cli.Flag{
+					&cli.StringFlag{
+						Name:			"log_type",
+						Aliases: 		[]string{"lt"},
+						Value: 			"system",
+						Usage:			"--log_type system or -lt system (Only for logs options:[system,application,security])",
+						Destination: 	&logType,
+					},
+					&cli.StringFlag{
+						Name: 			"ignore",
+						Aliases: 		[]string{"i"},
+						Value: 			"1h",
+						Usage: 			"--ignore 1h or -i 1h (Only for logs ignore before options:[1h,12h,24h,week,month])",
+						Destination: 	&ignore,
+					},
+					&cli.IntFlag{
+						Name: 			"size",
+						Aliases: 		[]string{"s"},
+						Value: 			200,
+						Usage: 			"--size 200 or -s 200 (Only for logs)",
+						Destination: 	&size,
+					},
+				},
+				Action: func(c *cli.Context) error {
+					windows_log.DisplayWindowsLogs(logType, ignore, size)
+					return nil
+				},
+			},
 			{
 				Name:  "check",
 				Usage: "Command for checking vulnerability exploitation",

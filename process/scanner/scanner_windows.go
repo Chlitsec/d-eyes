@@ -107,13 +107,13 @@ func (s *Scanner) ScanProcesses(pid int, ipList []string, Npattern []string) ([]
 		_psPath, _ := ps.Exe()
 		f, err := os.Open(_psPath)
 		if err != nil {
-			return fmt.Errorf("ScanFile err: %s", err), nil
+			return nil, fmt.Errorf("ScanFile err: %s", err)
 		}
 		defer f.Close()
 		err = s.Rules.ScanFileDescriptor(f.Fd(), 0, 10, &pathMatches)
 
 		if err != nil {
-			return fmt.Errorf("ScanFile err: %s", err), nil
+			return nil, fmt.Errorf("ScanFile err: %s", err)
 		}
 
 		var checkarg bool
